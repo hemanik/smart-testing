@@ -23,6 +23,8 @@ public class SkipTestExecutionFunctionalTest {
 
     private static final String EXPECTED_LOG_PART = "Enabling Smart Testing";
 
+    private static String[] modules = new String[] {"core/api", "core/spi", "core/impl-base", "config/api", "config/impl-base"};
+
     @Test
     public void should_execute_all_unit_tests_when_integration_test_execution_is_skipped() throws Exception {
         // given
@@ -35,7 +37,7 @@ public class SkipTestExecutionFunctionalTest {
 
         // when
         final Collection<TestResult> actualTestResults = project
-            .build()
+            .build(modules)
                 .options()
                     .withMavenLog()
                     .withSystemProperties("skipITs", "true")
@@ -45,7 +47,7 @@ public class SkipTestExecutionFunctionalTest {
         // then
         String capturedMavenLog = project.getMavenLog();
         assertThat(capturedMavenLog).contains(EXPECTED_LOG_PART);
-        assertThat(actualTestResults).size().isEqualTo(77);
+        assertThat(actualTestResults).size().isEqualTo(5);
     }
 
     @Test
@@ -60,7 +62,7 @@ public class SkipTestExecutionFunctionalTest {
 
         // when
         final Collection<TestResult> actualTestResults = project
-            .build()
+            .build(modules)
                 .options()
                     .withMavenLog()
                     .skipTests(true)

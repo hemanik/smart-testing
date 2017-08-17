@@ -35,17 +35,17 @@ public class SkipTestExecutionFunctionalTest {
 
         // when
         final Collection<TestResult> actualTestResults = project
-            .build("config/impl-base")
+            .build()
                 .options()
                     .withMavenLog()
                     .withSystemProperties("skipITs", "true")
                 .configure()
-            .run("clean", "install");
+            .run();
 
         // then
         String capturedMavenLog = project.getMavenLog();
         assertThat(capturedMavenLog).contains(EXPECTED_LOG_PART);
-        assertThat(actualTestResults).size().isEqualTo(5);
+        assertThat(actualTestResults).size().isEqualTo(77);
     }
 
     @Test
@@ -60,12 +60,12 @@ public class SkipTestExecutionFunctionalTest {
 
         // when
         final Collection<TestResult> actualTestResults = project
-            .build("config/impl-base")
+            .build()
                 .options()
                     .withMavenLog()
                     .skipTests(true)
                 .configure()
-            .run("clean", "install");
+            .run();
 
         // then
         String capturedMavenLog = project.getMavenLog();

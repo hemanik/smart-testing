@@ -1,0 +1,11 @@
+<component-set>
+  <components>
+    <component>
+      <role>org.arquillian.smart.testing.LifeCycleDebugLogger</role>
+      <implementation>
+        org.arquillian.smart.testing.Logger
+      </implementation>
+      <configuration/>
+    </component>
+  </components>
+</component-set>
